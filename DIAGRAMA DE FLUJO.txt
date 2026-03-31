@@ -1,0 +1,55 @@
+[Inicio: Usuario Navega en la Tienda] -> [Capturar Comportamiento del Usuario (Event Tracker)];
+[Capturar Comportamiento del Usuario (Event Tracker)] -> [Analizar Patrones de Comportamiento (Motor de Inferencia de IA)];
+
+# Bloque 1: Análisis de Comportamiento y Detección de Intención
+[Analizar Patrones de Comportamiento (Motor de Inferencia de IA)] --> {
+    Tiempo de Permanencia,
+    Frecuencia de Vista del Producto,
+    Comparación de Precios,
+    Número de Pestañas Abiertas,
+    Movimiento del Cursor y Clickstream
+};
+
+# Bloque 2: Inferencia de Intención y Objeciones
+{
+    Tiempo de Permanencia,
+    Frecuencia de Vista del Producto,
+    Comparación de Precios,
+    Número de Pestañas Abiertas,
+    Movimiento del Cursor y Clickstream
+} --> [Infiere Intención];
+
+[Infiere Intención] -> {
+    Intención: Duda (necesita info),
+    Intención: Precio (necesita incentivo),
+    Intención: Curiosidad (necesita guía),
+    Intención: Abandono (riesgo alto)
+};
+
+# Bloque 3: Intervención Estratégica en Tiempo Real
+{Intención: Duda (necesita info)} -> [Ofrecer Información Detallada/Comparativa (Chatbot/Asesor)];
+{Intención: Precio (necesita incentivo)} -> [Ofrecer Incentivo Inteligente (Descuento, Envío Gratis, Oferta por Tiempo Limitado)];
+{Intención: Curiosidad (necesita guía)} -> [Proporcionar Guía de Compra/Recomendaciones (Chatbot/Asesor)];
+{Intención: Abandono (riesgo alto)} -> [Activar Mensaje de Retención/Última Oferta Antes de Irse];
+
+# Bloque 4: Actuar en el Momento Crítico y Ejecución de Acciones
+[Ofrecer Información Detallada/Comparativa (Chatbot/Asesor)] -> [Ejecutar Acción en Tiempo Real];
+[Ofrecer Incentivo Inteligente (Descuento, Envío Gratis, Oferta por Tiempo Limitado)] -> [Ejecutar Acción en Tiempo Real];
+[Proporcionar Guía de Compra/Recomendaciones (Chatbot/Asesor)] -> [Ejecutar Acción en Tiempo Real];
+[Activar Mensaje de Retención/Última Oferta Antes de Irse] -> [Ejecutar Acción en Tiempo Real];
+
+# Bloque 5: Resultados e Interacciones Posteriores
+[Ejecutar Acción en Tiempo Real] --> [Conversión Exitosa (Compra)];
+[Ejecutar Acción en Tiempo Real] --> [Usuario Continúa Navegando/Abandona];
+
+# Bloque 6: Seguimiento y Retargeting (Acciones Post-Interacción)
+[Usuario Continúa Navegando/Abandona] -> [Seguimiento y Retargeting (Acciones Post-Interacción)];
+[Seguimiento y Retargeting (Acciones Post-Interacción)] --> [Enviar Email de Carrito Abandonado (si aplica)];
+[Seguimiento y Retargeting (Acciones Post-Interacción)] --> [Mostrar Anuncios de Retargeting];
+[Seguimiento y Retargeting (Acciones Post-Interacción)] --> [Actualizar Perfil de Usuario para Futuras Interacciones];
+
+# Bloque 7: Finalización del Flujo
+[Conversión Exitosa (Compra)] -> [Fin: Compra Completada];
+[Enviar Email de Carrito Abandonado (si aplica)] -> [Fin: Seguimiento Iniciado];
+[Mostrar Anuncios de Retargeting] -> [Fin: Seguimiento Iniciado];
+[Actualizar Perfil de Usuario para Futuras Interacciones] -> [Fin: Perfil Actualizado];
