@@ -249,9 +249,72 @@ Este documento constituye la especificación funcional y técnica base del siste
 
 ---
 
+## 🧪 DEMO 1 — Pseudocódigo
+
+```pseudo
+INICIO SCRIPT
+
+CONFIG = {
+  inactivity_ms: 20000,
+  eval_interval: 5000
+}
+
+STATE = {
+  session_id       : generarUUID(),
+  tiempo_en_pagina : 0,
+  clicks           : 0,
+  scroll           : 0,
+  mouse_movements  : 0,
+  ultima_actividad : timestamp_actual(),
+  popup_mostrado   : false,
+  dismissed        : false,
+  intencion        : "desconocida"
+}
+
+FUNCION init():
+  addEventListener("click", manejarClick)
+  addEventListener("scroll", manejarScroll)
+  addEventListener("mousemove", manejarMouse)
+  addEventListener("mouseleave", detectarExitIntent)
+  addEventListener("visibilitychange", detectarCambioTab)
+
+  setInterval(() → STATE.tiempo_en_pagina += 1, 1000)
+  setInterval(evaluarComportamiento, CONFIG.eval_interval)
+
+FUNCION inferirIntencion(evento):
+  SI evento == "exit_intent": RETORNAR "ABANDONO"
+  SI evento == "tab_change": RETORNAR "COMPARACION"
+  SI evento == "inactividad" Y STATE.tiempo_en_pagina > 20: RETORNAR "DUDA"
+  SI STATE.tiempo_en_pagina > 15 Y STATE.clicks > 2: RETORNAR "INTERES"
+  RETORNAR "AYUDA"
+
+FUNCION generarMensaje(intencion):
+  SI intencion == "ABANDONO": RETORNAR "Descuento si compras ahora"
+  SI intencion == "COMPARACION": RETORNAR "Mejor precio garantizado"
+  SI intencion == "DUDA": RETORNAR "¿Te ayudo a elegir?"
+  SI intencion == "INTERES": RETORNAR "Producto popular"
+  RETORNAR "¿Necesitas ayuda?"
+
+FUNCION procesarEvento(evento):
+  SI STATE.popup_mostrado O STATE.dismissed: RETORNAR
+  intencion = inferirIntencion(evento)
+  mensaje = generarMensaje(intencion)
+  ejecutarAccion(mensaje)
+
+FUNCION ejecutarAccion(mensaje):
+  STATE.popup_mostrado = true
+  mostrarPopup(mensaje)
+
+init()
+
+FIN SCRIPT
+```
+
+---
+
+
 ## 14. 🏁 Conclusión
 
 El proyecto presenta una oportunidad sólida dentro del mercado de e-commerce al abordar un problema crítico (conversión) mediante automatización inteligente.
-
 Su enfoque incremental permite validar rápidamente el mercado y evolucionar hacia una plataforma avanzada de inteligencia comercial basada en IA.
 
